@@ -14,7 +14,7 @@
   "buttonAssignments": {
     "leftClick": "button1",
     "rightClick": "button2",
-    "doubleClick": "button3",
+    "scrollClick": "button3",
     "scroll": "wheel"
   }
 
