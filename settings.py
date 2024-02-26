@@ -1,16 +1,21 @@
 import json
 
 class MouseConfig:
-  def __init__(self, dpi, sens, btnAssigment):
+  def __init__(self, dpi, sens, btnAssignments):
     self.dpi = dpi
     self.sens = sens
-    self.btnAssigment = btnAssigment
+    self.btnAssignments = btnAssignments
 
+  @staticmethod
   def from_json(data):
     return MouseConfig(
-      dpi = data['dpiSetting'],
+      dpi = data['dpiSettings'],
       sens = data['sensitivity'],
-      btnAssigment = data['buttonAssigment']
+      btnAssignments = data['buttonAssignments']
     )
 
+with open('mouse_config.json', 'r') as file:
+  data = json.load(file)
+  mouse_config = MouseConfig.from_json(data)
 
+print (mouse_config.dpi['low'])
