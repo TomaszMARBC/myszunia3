@@ -6,8 +6,8 @@ class MouseConfig:
     self.sens = sens
     self.btnAssignments = btnAssignments
 
-  @staticmethod
-  def from_json(data):
+  #@staticmethod
+  def config_from_json(data):
     return MouseConfig(
       dpi = data['dpiSettings'],
       sens = data['sensitivity'],
@@ -16,6 +16,6 @@ class MouseConfig:
 
 with open('mouse_config.json', 'r') as file:
   data = json.load(file)
-  mouse_config = MouseConfig.from_json(data)
+  mouse_config = MouseConfig.config_from_json(data)
 
-print (mouse_config.dpi['low'])
+print (mouse_config.dpi['high'])
