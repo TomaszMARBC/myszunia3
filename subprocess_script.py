@@ -2,6 +2,7 @@
 
 from pathlib import Path
 import subprocess
+from subprocess import CompletedProcess
 
 
 class AccessError(Exception):
@@ -20,25 +21,25 @@ def path_converter(path) -> str:
     return str_path
 
 
-def open_file(path):
+def open_file(path: str, command: str) -> CompletedProcess:
     """
     Using the subprocess library to open system file.
     
     :param path: Path to system file.
+    :param command: command to raise process
     :type path: str
     :return: A CompletedProcess object representing the completed process.
     :rtype: subprocess.CompletedProcess
     :raises AccessError: In case of a file access error.
     """
     try:
-        myszunio_lec = subprocess.run(path, check=True, shell=True)
-        return myszunio_lec
+        myszuniu_lec = subprocess.run(path + command, check=True)
+        return myszuniu_lec
     except subprocess.CalledProcessError as error:
         raise AccessError from error
 
 
-FILE_PATH = r'C:\WINDOWS\regedit.exe'
-# TEST_PATH = r'regedit /s HKEY_CURRENT_USER\Control Panel\Mouse\MouseSensitivity.reg'
-# NOWA_PATH = r'reg add HKEY_CURRENT_USER\Control Panel\Mouse /v MouseSensitivity /t REG_SZ /d 5 /f'
+MOUSE_FILE_PATH = r'REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse"'
+MOUSE_SENSITIVITY_COMMAND = r' /v MouseSensitivity /t REG_SZ /d 20 /f'
 
-open_file(path_converter(FILE_PATH))
+open_file(path_converter(MOUSE_FILE_PATH), MOUSE_SENSITIVITY_COMMAND)
