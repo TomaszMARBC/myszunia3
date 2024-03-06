@@ -9,16 +9,18 @@ class AccessError(Exception):
     """Exception for access error"""
 
 
-def path_converter(path) -> str:
-    """
-    Converts given path to the str of path object using the library pathlib.
-    
-    :param path: Path to conversion.
-    :return: a str type of Path object.
-    """
-    str_path = str(Path(path))
+# opcja pod inne systemy:
 
-    return str_path
+# def path_converter(path) -> str:
+#     """
+#     Converts given path to the str of path object using the library pathlib.
+#
+#     :param path: Path to conversion.
+#     :return: a str type of Path object.
+#     """
+#     str_path = str(Path(path))
+#
+#     return str_path
 
 
 def open_file(path: str, command: str) -> CompletedProcess:
@@ -33,13 +35,31 @@ def open_file(path: str, command: str) -> CompletedProcess:
     :raises AccessError: In case of a file access error.
     """
     try:
-        myszuniu_lec = subprocess.run(path + command, check=True)
-        return myszuniu_lec
+        zmien_wartosc = subprocess.run(path + command, check=True)
+        return zmien_wartosc
     except subprocess.CalledProcessError as error:
         raise AccessError from error
 
 
-MOUSE_FILE_PATH = r'REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse"'
-MOUSE_SENSITIVITY_COMMAND = r' /v MouseSensitivity /t REG_SZ /d 20 /f'
+# komendy które będziemy wywoływać:
 
-open_file(path_converter(MOUSE_FILE_PATH), MOUSE_SENSITIVITY_COMMAND)
+MOUSE_FILE_PATH = r'REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse"'
+
+MOUSE_SENSITIVITY_COMMAND = r' /v MouseSensitivity /t REG_SZ /d 10 /f'  # 10 - wartosci przed zmianami
+MOUSE_SPEED = r' /v MouseSpeed /t REG_SZ /d 0 /f'  # 1
+MOUSE_TRESHOLD1 = r' /v MouseThreshold1 /t REG_SZ /d 0 /f'  # 6
+MOUSE_TRESHOLD2 = r' /v MouseThreshold2 /t REG_SZ /d 0 /f'  # 10
+MOUSE_TRAILS = r' /v MouseTrails /t REG_SZ /d 0 /f'  # 0
+
+commands = [
+    MOUSE_SENSITIVITY_COMMAND,
+    MOUSE_SPEED,
+    MOUSE_TRESHOLD1,
+    MOUSE_TRESHOLD2,
+    MOUSE_TRAILS
+]
+
+for command in commands:
+    open_file(MOUSE_FILE_PATH, command)
+    
+print('Zmiana ustawień myszki zakończona sukcesem.')
