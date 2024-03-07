@@ -1,0 +1,21 @@
+{
+  "dpiSettings": {
+    "low": 400,
+    "medium": 800,
+    "high": 1600,
+    "extreme": 3200
+  },
+
+  "sensitivity": {
+    "xAxis": 1.5,
+    "yAxis": 1.5
+  },
+
+  "buttonAssignments": {
+    "leftClick": "button1",
+    "rightClick": "button2",
+    "scrollClick": "button3",
+    "scroll": "wheel"
+  }
+
+}
