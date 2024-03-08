@@ -1,3 +1,4 @@
+"""This tiny app increase speed of your mouse"""
 import pyautogui
 from time import sleep
 
@@ -17,3 +18,5 @@ while True:
     y3 = y1 + yy
 
     pyautogui.moveTo(x3, y3)
+
+arkparks
