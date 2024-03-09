@@ -1,50 +1,79 @@
-"""Using the subprocess library to open system file."""     # TODO sprawdzić komentarze na git hubie
+"""Using the subprocess library to open system file."""
 
-import subprocess                                           # TODO dodaj if __name__ == __main__
+import subprocess
 from subprocess import CompletedProcess
 
+if __name__ == '__main__':
 
-class AccessError(Exception):
-    """Exception for access error"""
-
-
-def open_file(path: str, command: str) -> CompletedProcess:   # TODO zmienić docstringi na google style python docstring
-    """
-    Using the subprocess library to open system file.
+    class AccessError(Exception):
+        """Exception for access error"""
     
-    :param path: Path to system file.
-    :param command: command to raise process
-    :type path: str
-    :return: A CompletedProcess object representing the completed process.
-    :rtype: subprocess.CompletedProcess
-    :raises AccessError: In case of a file access error.
-    """
-    try:
-        zmien_wartosc = subprocess.run(path + command, check=True)
-        return zmien_wartosc
-    except subprocess.CalledProcessError as error:
-        raise AccessError from error
-
-
-# komendy które będziemy wywoływać:                                         # TODO wywalić do funkcji/ yaml
-
-MOUSE_FILE_PATH = r'REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse"'        # TODO zmienić znaki na lowercase pozniej
-
-MOUSE_SENSITIVITY_COMMAND = r' /v MouseSensitivity /t REG_SZ /d 10 /f'  # 10 - wartosci przed zmianami
-MOUSE_SPEED = r' /v MouseSpeed /t REG_SZ /d 0 /f'  # 1
-MOUSE_TRESHOLD1 = r' /v MouseThreshold1 /t REG_SZ /d 0 /f'  # 6
-MOUSE_TRESHOLD2 = r' /v MouseThreshold2 /t REG_SZ /d 0 /f'  # 10
-MOUSE_TRAILS = r' /v MouseTrails /t REG_SZ /d 0 /f'  # 0
-
-commands = (
-    MOUSE_SENSITIVITY_COMMAND,
-    MOUSE_SPEED,
-    MOUSE_TRESHOLD1,
-    MOUSE_TRESHOLD2,
-    MOUSE_TRAILS
-)
-
-for command in commands:        # TODO jak się przeliterować po tupli?
-    open_file(MOUSE_FILE_PATH, command)
     
-print('Zmiana ustawień myszki zakończona sukcesem.')
+    def open_file(command: str) -> CompletedProcess:
+        """Using the subprocess library to open system file.
+        
+        This function takes one parameter in str. Parameter is a path to folder and command to do.
+        If everything goes well, function return completed process,
+        otherwise function raise AccessError.
+        
+        Args:
+            command: command to raise process.
+        
+        Returns:
+            A CompletedProcess object representing the completed process.
+        
+        Raises
+            AccessError: In case of a file access error.
+        """
+        try:
+            change_value = subprocess.run(command, check=True)
+            return change_value
+        except subprocess.CalledProcessError as error:
+            raise AccessError from error
+    
+    
+    def set_mouse_values(
+            reg_path: str,
+            sensitivity: int,
+            speed: int,
+            treshold1: int,
+            treshold2: int,
+            trails: int
+            ) -> None:
+        """Sets mouse-related settings in the Windows registry.
+    
+            Args:
+                reg_path (str): The registry path where the settings should be modified.
+                sensitivity (int): The sensitivity value for the mouse.
+                speed (int): The speed value for the mouse.
+                treshold1 (int): The threshold 1 value for the mouse.
+                treshold2 (int): The threshold 2 value for the mouse.
+                trails (int): The trails value for the mouse.
+    
+            Returns:
+                None
+    
+            Raises:
+                Any exceptions that occur during the registry modification process.
+    
+            Note:
+                This function modifies the Windows registry. Use with caution.
+            """
+        mouse_settings = {
+            'mouse_sensitivity': sensitivity,
+            'mouse_speed': speed,
+            'mouse_treshold1': treshold1,
+            'mouse_treshold2': treshold2,
+            'mouse_trails_cmd': trails
+        }
+        
+        for setting, value in mouse_settings.items():
+            cmd = f'REG ADD "{reg_path}" /v {setting} /t REG_SZ /d {value} /f'
+            open_file(cmd)
+    
+    
+    mouse_file_path = r'HKEY_CURRENT_USER\Control Panel\Mouse'
+    test_values = (10, 1, 0, 0, 0)
+    set_mouse_values(mouse_file_path, *test_values)
+    
+    print(f'\n{'*' * 30} \nZmiana ustawień myszki zakończona sukcesem.')
