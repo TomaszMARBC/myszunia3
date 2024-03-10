@@ -28,8 +28,8 @@ if __name__ == '__main__':
             AccessError: In case of a file access error.
         """
         try:
-            change_value = subprocess.run(command, check=True)
-            return change_value
+            execute_command = subprocess.run(command, capture_output=True, check=True, shell=True)
+            return execute_command
         except subprocess.CalledProcessError as error:
             raise AccessError from error
     
@@ -76,11 +76,13 @@ if __name__ == '__main__':
     
     mouse_file_path = r'HKEY_CURRENT_USER\Control Panel\Mouse'
     initial_mouse_settings = mouse.show_values(mouse_file_path, mouse.settings_names)
-    test_values = (10, 1, 0, 0, 0)
+    test_values = (100, 10, 0, 0, 0)
     
     print(f'Pierwotne wartości myszki: {initial_mouse_settings}\nZmieniam na {test_values}')
     
     set_mouse_values(mouse_file_path, *test_values)
+    current_values = mouse.show_values(mouse_file_path, mouse.settings_names)
+    print(f'Aktualne ustawienia: {current_values}')
     print(f'\nZmiana ustawień myszki zakończona sukcesem.\n{'*' * 50} ')        # TODO dodaj logi zamiast printów
     time.sleep(30)
     

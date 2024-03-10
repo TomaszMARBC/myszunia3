@@ -12,7 +12,7 @@ def open_file(command: str) -> CompletedProcess:
     This function takes one parameter in str. Parameter is a path to folder and command to do.
     If everything goes well, function return completed process,
     otherwise function raise AccessError.
-
+    
     Args:
         command: command to raise process.
 
@@ -23,7 +23,7 @@ def open_file(command: str) -> CompletedProcess:
         AccessError: In case of a file access error.
     """
     try:
-        execute_command = subprocess.run(command, capture_output=True, check=True)
+        execute_command = subprocess.run(command, capture_output=True, check=True, shell=True)
         return execute_command
     except subprocess.CalledProcessError as error:
         raise AccessError from error
@@ -50,11 +50,6 @@ def show_values(file_path: str, settings) -> tuple:
         result = open_file(cmd).stdout.decode('utf-8')
         
         if result.strip():
-            # Dodaj wartość do tupli
             mouse_settings += (result.strip().split()[-1],)
     
     return mouse_settings
-#
-#
-# basic_settings = show_values(mouse_file_path, settings_names)
-# print(f'Przywracam ustawienia pierwotne: {basic_settings}')
