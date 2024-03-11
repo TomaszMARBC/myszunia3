@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>B D S M</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.cdnfonts.com/css/gagalin" rel="stylesheet">
+    <link rel="stylesheet" href="static/assets/css/styles.css">
+
+</head>
+<body>
+<!--    Header div-->
+<header class="d-flex justify-content-center py-3">
+      <ul class="nav nav-pills">
+<!--        <li class="nav-item"><a href="#" class="nav-link">Home</a></li>-->
+        <li class="nav-item"><a href="#" class="nav-link">Button</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Button</a></li>
+      </ul>
+    </header>
+
+<!--    Hero div-->
+<div class="px-4 py-5 my-5 text-center">
+    <img class="d-block mx-auto mb-4" src="static/assets/img/logo.png" alt="logo">
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">Masz starą myszkę, którą nadal używasz i z jakiegoś powodu jesteś do niej przywiązany. Jednak brak przycisku zwiększającego DPI sprawia, że doświadczasz frustracji. Nawet po ustawieniu wszystkich suwaków w systemie Windows na maksymalne wartości, nadal odczuwasz, że twoja myszka nie spełnia twoich wymagań. Dzięki naszej aplikacji BDSM - Bardzo Dobra Szybkość Myszki, możesz zmienić swoją starą, niepozorną myszkę w prawdziwego demona prędkości.</p>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <a href="{{ url_for('download') }}" type="button" id="download-btn" class="btn btn-danger btn-lg px-4 gap-3">Pobierz</a>
+
+      </div>
+    </div>
+  </div>
+
+<!--Border Hero-->
+<div class="container marketing">
+
+    <!-- Three columns of text below the carousel -->
+    <div class="row">
+      <div class="col-lg-4 text-center">
+          <div class="d-flex flex-column align-items-center">
+        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-speedometer2" viewBox="0 0 19 19">
+        <path d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4M3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707M2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10m9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5m.754-4.246a.39.39 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.39.39 0 0 0-.029-.518z"/>
+        <path fill-rule="evenodd" d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A8 8 0 0 1 0 10m8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3"/>
+        </svg>
+        <h2 class="fw-normal">Szybkośc</h2>
+<!--        <p>Zwiększ prędkośc myszki ponad podstawowe ustawienia systemu.</p>-->
+        <p><a class="btn btn-danger" href="#scrollspyFirst">Szczegóły »</a></p>
+          </div>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4 text-center">
+          <div class="d-flex flex-column align-items-center">
+        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z"/>
+        <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466"/>
+        </svg>
+        <h2 class="ps-2 fw-normal">Gesty</h2>
+<!--        <p>Zaprogramuj specjalne gesty myszką które wykonają przypisaną akcję.</p>-->
+        <p><a class="btn btn-danger" href="#scrollspySeccond">Szczegóły »</a></p>
+          </div>
+      </div><!-- /.col-lg-4 -->
+              <div class="col-lg-4 text-center">
+          <div class="d-flex flex-column align-items-center">
+        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8"/>
+        </svg>
+        <h2 class="ps-2 fw-normal">Prostota</h2>
+<!--        <p>Zaprogramuj specjalne gesty myszką które wykonają przypisaną akcję.</p>-->
+        <p><a class="btn btn-danger" href="#scrollspyThird">Szczegóły »</a></p>
+          </div>
+      </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+
+
+    <!-- START THE FEATURETTES -->
+
+    <hr class="featurette-divider mt-5 pb-5">
+
+    <div class="row featurette" id="scrollspyFirst">
+
+      <div class="col-md-8">
+        <h2 class="featurette-heading fw-normal lh-1">BDSM to intuicyjne narzędzie,</h2>
+        <p class="lead"> które pozwala dostosować prędkość i czułość myszki do Twoich preferencji,
+            co pozwoli na szybsze i bardziej precyzyjne ruchy, bez względu na specyfikację Twojej myszki.
+        </p>
+      </div>
+      <div class="col-md-4">
+        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="300" height="300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect><text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">UI IMG</text></svg>
+      </div>
+    </div>
+
+    <hr class="featurette-divider mt-5 pb-5">
+
+    <div class="row featurette" id="scrollspySeccond">
+      <div class="col-md-8 order-md-2">
+        <h2 class="featurette-heading fw-normal lh-1">Nasza aplikacja posiada możliwość programowania gestów.</h2>
+        <p class="lead">Teraz możesz definiować własne gesty myszką, które wykonują różnorodne akcje na Twoim komputerze.
+            Wykonuj swoje zaprogramowane gesty i zwiększ efektywność podczas pracy, rozrywki, oraz codziennych zadań
+        </p>
+      </div>
+      <div class="col-md-4 order-md-1">
+        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="300" height="300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect><text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">UI IMG</text></svg>
+      </div>
+    </div>
+
+    <hr class="featurette-divider mt-5 pb-5">
+    <div class="row featurette" id="scrollspyThird">
+        <div class="col-md-8">
+            <h2 class="featurette-heading fw-normal lh-1">BDSM jest łatwa w obsłudze</h2>
+            <p class="lead"> i oferuje intuicyjny interfejs użytkownika,
+                dzięki czemu nawet mniej doświadczeni użytkownicy mogą korzystać z jej funkcji.
+                Nie pozwól, aby stara myszka ograniczała twoje możliwości
+            </p>
+        </div>
+      <div class="col-md-4">
+        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="300" height="300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect><text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">UI IMG</text></svg>
+      </div>
+    </div>
+
+    <hr class="featurette-divider mt-5 pb-3">
+
+    <!-- /END THE FEATURETTES -->
+
+    <!--    Footers-->
+    <div class="container">
+      <footer class="py-3 my-4">
+
+        <p class="text-center text-body-danger">© 2024  B D S M</p>
+      </footer>
+    </div>
+    <!--        End Footers-->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</body>
+</html>

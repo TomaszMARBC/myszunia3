@@ -1,0 +1,54 @@
+
+body {
+    font-family: 'Gagalin', sans-serif;
+    background-color: black;
+    color: white;
+
+
+}
+.nav-link {
+    color: #950101;
+    font-size: 2rem;
+    font-weight: bold;
+
+
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: black;
+    background-color: #950101;
+    font-size: 2rem;
+    font-weight: bold;
+}
+.nav {
+--bs-nav-link-color: #FF0000;
+--bs-nav-link-hover-color: #FF0000;
+}
+
+.btn {
+background-color: #950101;
+color: black;
+font-size: 1.5rem;
+font-weight: bold;
+font-family: 'Gagalin', sans-serif;
+}
+
+.btn-danger {
+--bs-btn-hover-bg: #FF0000;
+}
+
+#download-btn {
+    font-size: 3rem;
+}
+
+p {
+color: #950101;
+
+}
+.py-5 {
+padding-top: 1rem !important;
+}
+
+#title {
+color: #950101;
+font-family: 'Gagalin', sans-serif;
+}
