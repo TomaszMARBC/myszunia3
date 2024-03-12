@@ -4,7 +4,25 @@ import time
 import subprocess_for_myszunia as myszunia
 
 if __name__ == '__main__':
+    
     # TODO napisz funkcję przyjmującą rządane ustawienia myszki
+    user_values = ()
+    def put_user_values(user_values):
+        user_values += input()
+        return user_values
+    
+    while len(user_values) < 5:
+
+        print(
+            'Podaj kolejno wartości dla następujacych ustawień:\n',
+            'MouseSensitivity\n',
+            'MouseSpeed\n',
+            'MouseThreshold1\n',
+            'MouseThreshold2\n',
+            'MouseTrails'
+            )
+        put_user_values(user_values)
+    
     mouse_file_path = r'HKEY_CURRENT_USER\Control Panel\Mouse'
     settings_names = (
         'MouseSensitivity',
@@ -22,7 +40,7 @@ if __name__ == '__main__':
     print(f'Bierzące ustawienia: {current_settings}')
     
     mouse_settings.set_mouse_values(mouse_file_path, *test_values)      # TODO nie podaje test values!!!
-    time.sleep(5)
+    time.sleep(2)
     entered_settings = mouse_settings.show_values(mouse_file_path, settings_names)
     print(f'Ustawienia po zmianie: {entered_settings}')
 
@@ -32,4 +50,3 @@ if __name__ == '__main__':
     current_settings = mouse_settings.show_values(mouse_file_path, settings_names)
     print(f'Bierzące ustawienia: {current_settings}')
     
-

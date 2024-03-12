@@ -12,10 +12,11 @@ class MouseSettings:        # TODO dodaj logi
     def __init__(self) -> None:
         self.command = None
         self.file_path = None
-        self.mouse_settings = None
+        self.current_values = None
         self.settings_names = None
     
-    def execute_command(self) -> CompletedProcess:
+    @staticmethod
+    def execute_command(command: str) -> CompletedProcess:
         """
         Using the subprocess library to open system file.
 
@@ -33,7 +34,7 @@ class MouseSettings:        # TODO dodaj logi
                 AccessError: In case of a file access error.
         """
         try:
-            execute_command = subprocess.run(self.command, capture_output=True, check=True, shell=True)
+            execute_command = subprocess.run(command, capture_output=True, check=True, shell=True)
             return execute_command
         except subprocess.CalledProcessError as error:
             raise AccessError from error
@@ -51,16 +52,16 @@ class MouseSettings:        # TODO dodaj logi
             tuple: A tuple containing the values of the specified settings.
         """
         self.settings_names = settings_names
-        self.mouse_settings = ()
+        self.current_values = ()
         
         for setting in self.settings_names:
-            self.command = f'REG QUERY "{file_path}" /v {setting}'
-            result = self.execute_command().stdout.decode('utf-8')
+            command = f'REG QUERY "{file_path}" /v {setting}'
+            result = self.execute_command(command).stdout.decode('utf-8')
             
             if result.strip():
-                self.mouse_settings += (result.strip().split()[-1],)
+                self.current_values += (result.strip().split()[-1],)
         
-        return self.mouse_settings
+        return self.current_values
     
     def set_mouse_values(
             self,
@@ -92,31 +93,13 @@ class MouseSettings:        # TODO dodaj logi
                 This function modifies the Windows registry. Use with caution.
             """
         set_mouse_settings = {
-            'mouse_sensitivity': sensitivity,
-            'mouse_speed': speed,
-            'mouse_treshold1': treshold1,
-            'mouse_treshold2': treshold2,
-            'mouse_trails_cmd': trails
+            'MouseSensitivity': sensitivity,
+            'MouseSpeed': speed,
+            'MouseThreshold1': treshold1,
+            'MouseThreshold2': treshold2,
+            'MouseTrails': trails
         }
         
         for setting, value in set_mouse_settings.items():
-            self.command = f'REG ADD "{file_path}" /v {setting} /t REG_SZ /d {value} /f'
-            self.execute_command()
-    
-
-mouse_file_path = r'HKEY_CURRENT_USER\Control Panel\Mouse'
-settings_names = (
-    'MouseSensitivity',
-    'MouseSpeed',
-    'MouseThreshold1',
-    'MouseThreshold2',
-    'MouseTrails'
-)
-test_values = (100, 10, 0, 0, 0)
-
-# happy testing
-mouse_settings = MouseSettings()        # TODO dodaj ładne wyświetlanie ustawienia -> wartości
-print(f'Ustawienia początkowe: {mouse_settings.show_values(mouse_file_path, settings_names)}')
-mouse_settings.set_mouse_values(mouse_file_path, *test_values)
-print(f'Ustawienia po zmianie: {mouse_settings.show_values(mouse_file_path, settings_names)}')
-
+            command = f'REG ADD "{file_path}" /v {setting} /t REG_SZ /d {value} /f'
+            self.execute_command(command)
