@@ -1,7 +1,0 @@
-polecenia zwracające aktualne wartości ustawień myszki:
-
-REG QUERY "HKEY_CURRENT_USER\Control Panel\Mouse" /v MouseSensitivity
-REG QUERY "HKEY_CURRENT_USER\Control Panel\Mouse" /v MouseSpeed
-REG QUERY "HKEY_CURRENT_USER\Control Panel\Mouse" /v MouseThreshold1
-REG QUERY "HKEY_CURRENT_USER\Control Panel\Mouse" /v MouseThreshold2
-REG QUERY "HKEY_CURRENT_USER\Control Panel\Mouse" /v MouseTrails
