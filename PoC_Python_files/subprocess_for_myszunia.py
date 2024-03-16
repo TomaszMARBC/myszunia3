@@ -58,7 +58,9 @@ class MouseSettings:
             result = self.execute_command(command).stdout.decode('utf-8')
             
             if result.strip():
-                self.current_values += (result.strip().split()[-1],)
+                value = (result.strip().split()[-1],)
+                self.current_values += value
+                print(f'Wartość ustawienia dla {setting} = {value[0]}')
         
         return self.current_values
     

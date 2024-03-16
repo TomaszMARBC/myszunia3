@@ -3,7 +3,7 @@
 from itertools import zip_longest
 
 
-def put_user_values(settings_names: tuple[str]) -> tuple[str]:
+def put_user_values(settings_names: tuple[str, ...]) -> tuple[str, ...]:
     """
     Retrieves values from the user for the provided settings.
     
@@ -39,10 +39,27 @@ def put_user_values(settings_names: tuple[str]) -> tuple[str]:
             print(f'Podana wartość: {name} = {value}')
         
         user_choice = input(
-            f'\nJeśli chcesz wprowadzić wartości ponownie, wpisz "y",\n'
+            f'\nJeśli chcesz wprowadzić wartości ponownie, wpisz "y" i wciśnij Enter\n'
             f'Jeśi chcesz rozpocząć test wciśnij Enter: ')
         
         if user_choice != 'y':
             break
     
     return user_values
+
+
+def set_time() -> int:
+    """
+    Retrieves value from the user.
+    
+    Returns:
+        int: A integer of user-supplied value.
+    
+    """
+    user_time = input('Podaj czas trwania testu w sekundach: ')
+    while True:
+        if user_time.isdigit():
+            break
+        else:
+            user_time = input('Wpisz liczbę sekund: ')
+    return int(user_time)
