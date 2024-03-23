@@ -14,7 +14,7 @@ def main():
         second_position_x, second_position_y = pyautogui.position()
 
         difference_x = second_position_x - first_position_x
-        difference_y = second_position_y - first_position_x
+        difference_y = second_position_y - first_position_y
 
         if abs(difference_x) >= min_movement or abs(difference_y) >= min_movement:
             distance_to_move_in_x = difference_x * how_much_faster
