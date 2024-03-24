@@ -92,6 +92,8 @@ def looking_for_best_solution():
             PyAutoGUI_Movement(how_much_faster)    
 
 def main():
+    pyautogui.FAILSAFE = False
+    
     start_time, how_much_faster = collecting_data()
     
     print('After 15 seconds, your settings will went back to default')
