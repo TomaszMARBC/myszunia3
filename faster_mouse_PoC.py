@@ -3,8 +3,6 @@ import pyautogui
 import time
 import os
 
-min_movement = 3
-
 def collecting_data():
     """
     Function to collect user input for mouse movement speed and record start time.
@@ -16,11 +14,13 @@ def collecting_data():
         ValueError: If the input for mouse movement speed is not an integer.
     """
     str_how_much_faster = input('how fast your mouse should move? [1-30] -> ')
+    str_min_movement = input('what is the speed limit, for mouse without extra superpower? [5-30] -> ')
+    min_movement = int(str_min_movement)
     how_much_faster = int(str_how_much_faster)
     start_time = time.time()
-    return start_time, how_much_faster
+    return start_time, how_much_faster, min_movement
 
-def PyAutoGUI_Movement(how_much_faster):
+def PyAutoGUI_Movement(how_much_faster, min_movement):
     """
     Moves the mouse cursor with PyAutoGUI library while considering the speed factor.
 
@@ -42,12 +42,11 @@ def PyAutoGUI_Movement(how_much_faster):
         None
     """
     first_position_x , first_position_y =pyautogui.position()
-    time.sleep(0.001)
     second_position_x, second_position_y = pyautogui.position()
 
     difference_x = second_position_x - first_position_x
     difference_y = second_position_y - first_position_y
-
+    
     if abs(difference_x) >= min_movement or abs(difference_y) >= min_movement:
         distance_to_move_in_x = difference_x * how_much_faster
         third_position_x = second_position_x + distance_to_move_in_x
@@ -82,24 +81,26 @@ def looking_for_best_solution():
         print('Then - that will work as long as you wont turn it off')
         str_how_much_faster = input('Once again, how fast it should be? [1-30] -> ')
         how_much_faster = int(str_how_much_faster)
+        str_min_movement = input('what is the speed limit, for mouse without extra superpower? [5-30] -> ')
+        min_movement = int(str_min_movement)
         while True:
-            PyAutoGUI_Movement(how_much_faster)
+            PyAutoGUI_Movement(how_much_faster, min_movement)
     else:
         print("let's give it another try...")
         time.sleep(1)
-        start_time, how_much_faster = collecting_data()
+        start_time, how_much_faster, min_movement = collecting_data()
         while (time.time() - start_time) < 15:
-            PyAutoGUI_Movement(how_much_faster)    
+            PyAutoGUI_Movement(how_much_faster, min_movement)    
 
 def main():
     pyautogui.FAILSAFE = False
     
-    start_time, how_much_faster = collecting_data()
+    start_time, how_much_faster, min_movement = collecting_data()
     
     print('After 15 seconds, your settings will went back to default')
     
     while (time.time() - start_time) < 15:
-        PyAutoGUI_Movement(how_much_faster)
+        PyAutoGUI_Movement(how_much_faster, min_movement)
 
     while True:
         looking_for_best_solution()
